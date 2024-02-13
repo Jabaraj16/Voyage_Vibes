@@ -1,0 +1,29 @@
+ @import url('https://fonts.googleapis.com/css2?family=Marvel&family=Pixelify+Sans&family=Protest+Revolution&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+.bg-image{
+    background-image: url("https://cdn.dribbble.com/users/720472/screenshots/2177275/media/6877cd2a6dd0ce287489b8b631faad7f.gif");
+    /* background-repeat: no-repeat; */
+    background-size: contain;
+    background-position: center;
+}
+/* .form_box{
+
+        background: inherit;
+        border-radius: 2px;
+        overflow: hidden;
+        
+        box-shadow: inset 0 0 0 200px rgba(255,255,255,0.5);
+        filter: blur(1px);
+      
+}
+
+.form_box::after{
+    filter: blur(1px);
+} */
+.mainFont{
+    font-family: 'Protest Revolution', sans-serif;
+}
