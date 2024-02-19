@@ -8,6 +8,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { loginAPI, registerAPI } from '../../Services/allAPI';
 import Spinner from 'react-bootstrap/Spinner';
+
+
 function Auth({ insideRegister }) {
   const [SpinnerStatus,setSpinnerStatus]=useState(false)
   const navigate=useNavigate()
@@ -51,6 +53,7 @@ function Auth({ insideRegister }) {
           setSpinnerStatus(true)
           sessionStorage.setItem("username",result.data.existingUser.username)
           sessionStorage.setItem("token",result.data.token)
+          sessionStorage.setItem("email",result.data.existingUser.email)
           setTimeout(()=>{
             navigate('/')
           },2000)

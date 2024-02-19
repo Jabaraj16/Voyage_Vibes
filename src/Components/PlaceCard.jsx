@@ -1,7 +1,7 @@
-import { Rating, Typography } from '@mui/material'
-import React, { useState } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
-import Box from '@mui/material/Box';
+
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -9,55 +9,70 @@ import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
 
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import { Server_URL } from '../../Services/ServerURL';
 
-function PlaceCard() {
+function PlaceCard({place}) {
     const [value, setValue] = useState(5)
     const [show, setShow] = useState(false);
 
-
+   
+  
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
         <div>
 
-            <Card className='btn' onClick={handleShow} style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-                <Card.Body>
-                    <Card.Title>Taj Mahal</Card.Title>
-                    <Card.Text >
-                        
-                            <div className='d-flex justify-content-center'>
-                               <h6>Review by :</h6>
-                                <p className='ms-3'>jabaraj</p>
-                            </div>
-                        
-                    </Card.Text>
-                </Card.Body>
-            </Card>
+            <div className='d-flex '>
+                    <Card className='btn me-5' onClick={handleShow} style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={`${Server_URL}/uploads/${place.placeImage}`} />
+                        <Card.Body>
+                            <Card.Title>{place.placeName}</Card.Title>
+                            <Card.Text >
+
+                                <div className='d-flex justify-content-center flex-column'>
+                                   <div className='d-flex justify-content-center'>
+                                        <h6>Review by :</h6>
+                                        <p className='ms-3'>{place.username}</p>
+                                   </div>
+                                    <div>
+                                        <Box
+                                            sx={{
+                                                '& > legend': { mt: 2 },
+                                            }}
+                                        >
+                                             <Rating name="read-only" value={place.placeRating}readOnly />
+                                             </Box>
+                                    </div>
+                                </div>
+
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+            </div>
 
 
             <Modal size='lg' centered show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Taj Mahal</Modal.Title>
+                    <Modal.Title>{place.placeName}</Modal.Title>
                 </Modal.Header>
                 <Row>
                     <Col md={6} >
                         <Modal.Body>
-                            <img width={'100%'} src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                            <img width={'100%'} src={`${Server_URL}/uploads/${place.placeImage}`} alt="" />
                         </Modal.Body>
                     </Col>
 
                     <Col md={6} >
                         <Modal.Body>
                             <div>
-                                <h6>Review by : jabaraj</h6>
+                                <h6>Review by : <span>{place.username}</span></h6>
                                 <h6>Review:</h6>
                                 <p>
-                                    Truly a Wonder of the world. Had a lovely visit with kids and family.
-                                    Crowds were manageable for a Saturday and we were able to complete the visit in 2.5 hours.
-                                    Work a trip to Agra to just see this marvel
+                                    {place.review}
                                 </p>
-                                <a href='https://maps.app.goo.gl/igDQDDdx8DdaAiaf8' target='_blank'><i class="fa-solid fa-map-location"></i></a>
+                                <a href={place.placeLocation} target='_blank'><i class="fa-solid fa-map-location"></i></a>
                             </div>
                         </Modal.Body>
                     </Col>
@@ -68,7 +83,7 @@ function PlaceCard() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-           
+
         </div>
     )
 }

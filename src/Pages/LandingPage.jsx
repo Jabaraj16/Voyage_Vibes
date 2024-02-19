@@ -7,16 +7,40 @@ import Aos from 'aos';
 import 'aos/dist/aos.css';
 // import PlaceCard from '../Components/PlaceCard';
 import PlaceCard from '../Components/PlaceCard'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../Components/Footer';
-
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { getHomePlaceAPI } from '../../Services/allAPI';
 function LandingPage() {
-  const [profileStatus,setProfileStatus]=useState(true)
+  const navigate=useNavigate()
+  const [reviewData, setReviewData] = useState([])
+
   useEffect(() => {
     Aos.init();
+    getHomePlace()
   }, [])
 
   const token=sessionStorage.getItem("token")
+
+  const handleViewPage=()=>{
+    const token=sessionStorage.getItem("token")
+    if(token){
+      navigate('/allreview')
+      
+    }else{
+      toast.warning("Please login to veiw project !!")
+      setTimeout(()=>{
+        navigate('/login')
+      },3000)
+    }
+  }
+  
+const getHomePlace = async () => {
+    const result = await getHomePlaceAPI()
+    console.log(result.data);
+    setReviewData(result.data)
+}
   return (
     <>
       <div className='w-100' style={{height:'100vh'}}>
@@ -64,17 +88,24 @@ function LandingPage() {
          
          <marquee >
             <div className='w-100 mt-5 container-fluid'>
-            <div><PlaceCard/></div>
+            <div className='d-flex'>
+              {reviewData?.length>0?reviewData.map(place=>(
+                 <PlaceCard place={place}/>
+              )             
+              ): <div>No review yet</div>
+                }
+              </div>
             </div>
          </marquee>
          <div className='w-100 text-center'>
-                <Link to={'/allreview'}><p className='btn border  mt-4'>view more</p></Link>
+               <button onClick={handleViewPage} className='btn border  mt-4 btn'>view more</button>
             </div>
       </div>
       <div>
         <Footer/>
       </div>
     </div>
+    <ToastContainer autoClose={3000} theme='colored' />
     </>
   )
 }
