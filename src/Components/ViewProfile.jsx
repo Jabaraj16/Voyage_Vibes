@@ -30,7 +30,7 @@ function ViewProfile({addReviewLength}) {
           setSpinnerStatus(true)
 
           setTimeout(()=>{
-            navigate('/')
+            navigate('/register')
           },3000)
         }
       }catch(err){
