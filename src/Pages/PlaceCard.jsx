@@ -21,7 +21,7 @@ function PlaceCard() {
         <div>
 
             <Card className='btn' onClick={handleShow} style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+                <Card.Img variant="top" width={"100%"} src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
                 <Card.Body>
                     <Card.Title>Taj Mahal</Card.Title>
                     <Card.Text >
