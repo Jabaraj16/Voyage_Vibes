@@ -15,15 +15,22 @@ function Dashboard() {
   const {editPlaceResponse,setEditPlaceResponse}=useContext(editPlaceContextResponse)
   const {addPlaceResponse,setAddPlaceResponse}=useContext(addPlaceResponseContext)
   const {removePlaceResponse,setRemovePlaceResponse}=useContext(removePlaceContextResponse)
+  
   const [placeData,setPlaceData]=useState([])
+  const[addReviewLength,setAddReviewLength]=useState(0)
   const username=sessionStorage.getItem("username")
 
 
   useEffect(()=>{
       getuserPlace()
-      
-  },[addPlaceResponse,editPlaceResponse,removePlaceResponse])
+      if(placeData.length>0){
+        setAddReviewLength(placeData.length)
+      }else{
+        setAddReviewLength(0)
+      }
+  },[addPlaceResponse,editPlaceResponse,removePlaceResponse,placeData.length])
   
+ 
 
 
   const getuserPlace=async()=>{
@@ -36,7 +43,7 @@ function Dashboard() {
           const result=await getUserPlaceAPI(reqHeader)
             if(result.status==200){
               setPlaceData(result.data)
-              
+              setAddReviewLength(placeData.length)
             }else{
               setPlaceData([])
               console.log("here");
@@ -49,18 +56,18 @@ console.log(placeData);
   return (
     <div>
       <Header insidereview />
-      <div className='w-100 bg-success  p-3'>
+      <div className='w-100  p-3 rounded-bottom' style={{ backgroundColor: '#424242'}}>
         <h4 className='text-white ms-5 ps-5'>Hey,{username}</h4>
       </div>
       <div className='container-fluid'>
-        <div className='row '>
-          <div className='col-lg-3 ' style={{ backgroundColor: '#424242' ,height:'100vh'}}>
-            <div className='d-flex flex-column justify-content-center align-items-center mt-5' >
+        <div className='row mt-2 '>
+          <div className='col-lg-3 rounded-end' style={{ backgroundColor: '#424242' ,height:'100vh'}}>
+            <div className='d-flex flex-column justify-content-center align-items-center mt-5 ' >
               <div className='mb-4 mt-5'>
                 <AddReview/>
               </div>
               <div className='mb-4'>
-                <ViewProfile placeData={placeData}/>
+                <ViewProfile addReviewLength={addReviewLength}/>
               </div>
             </div>
           </div>
@@ -74,7 +81,9 @@ console.log(placeData);
                     <MyReview place={place} />
                   </div>
                 </div>
-                )): <div className='w-100 text-center'><h5>No review added</h5></div>
+                )): <div className='w-100 text-center'>
+                  <img src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-626.jpg" alt="" />
+                </div>
               }
               </div>
             </div>

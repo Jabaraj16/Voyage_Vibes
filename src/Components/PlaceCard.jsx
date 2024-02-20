@@ -25,7 +25,7 @@ function PlaceCard({place}) {
         <div>
 
             <div className='d-flex '>
-                    <Card className='btn me-5' onClick={handleShow} style={{ width: '18rem' }}>
+                    <Card className='btn me-5' onClick={handleShow} style={{ width: '17rem',height:'300px' }}>
                         <Card.Img variant="top" src={`${Server_URL}/uploads/${place.placeImage}`} />
                         <Card.Body>
                             <Card.Title>{place.placeName}</Card.Title>

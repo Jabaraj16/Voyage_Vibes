@@ -51,7 +51,9 @@ function ViewAll() {
               <Col className='mb-3 ' lg={3}>
                 <PlaceCard place={place} />
             </Col>
-            )):<p>No data found</p>
+            )):<div className='w-100 text-center'>
+              <img className='text-center' src="https://img.freepik.com/premium-vector/no-data-concept-illustration_86047-486.jpg" alt="" />
+            </div>
                 }
           </Row>
         </div>

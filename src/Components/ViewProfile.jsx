@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-function ViewProfile({placeData}) {
+function ViewProfile({addReviewLength}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const[addReviewLength,setAddReviewLength]=useState(0)
+  
   const username=sessionStorage.getItem("username")
   const email=sessionStorage.getItem("email")
-  useEffect(()=>{
-    setAddReviewLength(placeData.length)
-  },[addReviewLength])
+  
   return (
     <div>
-        <button  className='btn text-black rounded bg-white '  onClick={handleShow}>View Profile</button>
+        <button  className='btn text-black rounded bg-white fw-bold'  onClick={handleShow}>View Profile</button>
 
 
         <Offcanvas show={show} onHide={handleClose} placement='end'>

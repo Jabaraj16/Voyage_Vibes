@@ -89,7 +89,7 @@ console.log(preview);
 
   return (
     <>
-      <button onClick={handleShow} className='btn text-black rounded bg-white '>Add Review</button>
+      <button onClick={handleShow} className='btn text-black rounded bg-white fw-bold'>Add Review</button>
       <Modal size="lg"
         show={show}
         onHide={handleClose}
