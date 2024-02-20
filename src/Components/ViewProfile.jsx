@@ -23,6 +23,7 @@ function ViewProfile({addReviewLength}) {
         <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black'>{username}</button></p>
         <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black'>{email}</button></p>
         <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black'>Added Review :{addReviewLength}</button></p>
+        {/* <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow  text-black bg-danger'>Delete Account{addReviewLength}</button></p> */}
         </Offcanvas.Body>
       </Offcanvas>
     </div>

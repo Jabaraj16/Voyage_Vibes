@@ -46,8 +46,8 @@ function MyReview({place}) {
         <div>
 
             <div className=''>
-                    <Card className='me-5'  style={{ width: '18rem' }}>
-                        <Card.Img className='btn' onClick={handleShow} variant="top" src={`${Server_URL}/uploads/${place.placeImage}`} />
+                    <Card className='me-5' style={{ width: '17rem',height:'300px' }}>
+                        <Card.Img className='btn '  height={"50%"} onClick={handleShow} variant="top" src={`${Server_URL}/uploads/${place.placeImage}`} />
                         <Card.Body>
                             <Card.Title>{place.placeName}</Card.Title>
                             <Card.Text >
