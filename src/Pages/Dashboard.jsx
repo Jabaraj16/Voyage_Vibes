@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { getUserPlaceAPI } from '../../Services/allAPI';
 import { addPlaceResponseContext, editPlaceContextResponse, removePlaceContextResponse } from '../ContextAPI/ContextShare';
 import ViewProfile from '../Components/ViewProfile';
+import { Link } from 'react-router-dom';
 function Dashboard() {
 
   const {editPlaceResponse,setEditPlaceResponse}=useContext(editPlaceContextResponse)
@@ -56,9 +57,13 @@ console.log(placeData);
   return (
     <div>
       <Header insidereview />
-      <div className='w-100  p-3 rounded-bottom' style={{ backgroundColor: '#424242'}}>
+      <div className='w-100  p-3 rounded-bottom d-flex justify-content-between' style={{ backgroundColor: '#424242'}}>
         <h4 className='text-white ms-5 ps-5'>Hey,{username}</h4>
+        <div>
+          <Link to={'/'}><button className='btn btn-info'>Home</button></Link>
+        </div>
       </div>
+
       <div className='container-fluid'>
         <div className='row mt-2 '>
           <div className='col-lg-3 rounded-end' style={{ backgroundColor: '#424242' ,height:'100vh'}}>

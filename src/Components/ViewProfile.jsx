@@ -1,14 +1,44 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { deleteUserAPI } from '../../Services/allAPI';
+import { useNavigate } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
+
 function ViewProfile({addReviewLength}) {
   const [show, setShow] = useState(false);
-
+  const [SpinnerStatus,setSpinnerStatus]=useState(false)
+  const navigate=useNavigate()
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
   const username=sessionStorage.getItem("username")
   const email=sessionStorage.getItem("email")
+  
+  const handleDelete=async()=>{
+    const token=sessionStorage.getItem("token")
+    if(token){
+      const reqHeader={
+        "Content-Type":"application/json",
+        "Authorization":`Bearer ${token}`
+      }
+      try{
+        
+        const result=await deleteUserAPI(reqHeader)
+
+        if(result.status==200){
+          setSpinnerStatus(true)
+
+          setTimeout(()=>{
+            navigate('/')
+          },3000)
+        }
+      }catch(err){
+        console.log(err);
+      }
+    }
+  }
+
   
   return (
     <div>
@@ -23,7 +53,12 @@ function ViewProfile({addReviewLength}) {
         <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black'>{username}</button></p>
         <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black'>{email}</button></p>
         <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black'>Added Review :{addReviewLength}</button></p>
-        {/* <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow  text-black bg-danger'>Delete Account{addReviewLength}</button></p> */}
+        <p className='text-center fs-4 p-2 fw-bolder ' ><button onClick={handleDelete} className='btn shadow  text-black bg-danger me-2'>Delete Account</button>
+        {
+            SpinnerStatus &&
+            <div  className='mt-2'><Spinner animation="border" variant="black" /></div>
+          }
+        </p>
         </Offcanvas.Body>
       </Offcanvas>
     </div>

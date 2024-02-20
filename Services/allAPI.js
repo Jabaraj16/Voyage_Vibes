@@ -40,3 +40,8 @@ export const editPlaceAPI=async(id,reqBody,reqHeader)=>{
 export const removePlaceAPI=async(pid,reqHeader)=>{
     return await commonAPI("DELETE",`${Server_URL}/place/delete/${pid}`,{},reqHeader)
 }
+
+//delete user
+export const deleteUserAPI=async(reqHeader)=>{
+    return await commonAPI("DELETE",`${Server_URL}/profile/delete`,{},reqHeader)
+}
