@@ -32,7 +32,7 @@ function Auth({ insideRegister }) {
          
           setTimeout(()=>{
             navigate('/login')
-          },3000)
+          },1000)
           setUserData({username:"",email:"",password:""})
         }else{
           toast.warning(result.response.data)

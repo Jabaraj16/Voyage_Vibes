@@ -22,20 +22,27 @@ function ViewProfile({addReviewLength}) {
         "Content-Type":"application/json",
         "Authorization":`Bearer ${token}`
       }
-      try{
+      const Deleteresult=confirm("Are you sure want to delete account?")
+        console.log(Deleteresult);
+        if(Deleteresult){
+          try{
         
-        const result=await deleteUserAPI(reqHeader)
-
-        if(result.status==200){
-          setSpinnerStatus(true)
-
-          setTimeout(()=>{
-            navigate('/register')
-          },3000)
+            const result=await deleteUserAPI(reqHeader)
+    
+            if(result.status==200){
+              setSpinnerStatus(true)
+    
+              setTimeout(()=>{
+                navigate('/register')
+              },3000)
+            }
+          }catch(err){
+            console.log(err);
+          }
+        }else{
+          console.log("nothing");
         }
-      }catch(err){
-        console.log(err);
-      }
+      
     }
   }
 
@@ -50,9 +57,9 @@ function ViewProfile({addReviewLength}) {
           <Offcanvas.Title>Profile</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-        <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black'>{username}</button></p>
-        <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black'>{email}</button></p>
-        <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black'>Added Review :{addReviewLength}</button></p>
+        <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black w-100'>{username}</button></p>
+        <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black  w-100'>{email}</button></p>
+        <p className='text-center fs-4 p-2 fw-bolder ' ><button className='btn shadow disabled text-black w-100'>Added Review :{addReviewLength}</button></p>
         <p className='text-center fs-4 p-2 fw-bolder ' ><button onClick={handleDelete} className='btn shadow  text-black bg-danger me-2'>Delete Account</button>
         {
             SpinnerStatus &&

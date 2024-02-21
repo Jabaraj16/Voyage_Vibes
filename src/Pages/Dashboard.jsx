@@ -58,7 +58,7 @@ console.log(placeData);
     <div>
       <Header insidereview />
       <div className='w-100  p-3 rounded-bottom d-flex justify-content-between' style={{ backgroundColor: '#424242'}}>
-        <h4 className='text-white ms-5 ps-5'>Hey,{username}</h4>
+        <h4 className='text-white ms-5 ps-5'>Hey,{username.split(" ")[0]}</h4>
         <div>
           <Link to={'/'}><button className='btn btn-info'>Home</button></Link>
         </div>
